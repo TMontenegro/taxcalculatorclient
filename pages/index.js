@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useState } from "react";
 
-import htmlTemplate from "../public/index.html";
+import template from "../public/index.html";
 
 export default function Home() {
   const importedOptions = [
@@ -119,7 +119,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <div className="content" dangerouslySetInnerHTML={{__html: htmlTemplate}}></div>
+      <div className="content" dangerouslySetInnerHTML={{__html: template}}></div>
 
       <Head>
         <title>Tax Calculator</title>

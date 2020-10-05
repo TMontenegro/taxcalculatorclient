@@ -4,9 +4,9 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useState } from "react";
 
-export default function Home() {
-  // http://taxcalculator-env-1.eba-dfnvacpx.us-east-1.elasticbeanstalk.com/checkout
+import htmlTemplate from "../public/index.html";
 
+export default function Home() {
   const importedOptions = [
     {
       value: true,
@@ -119,6 +119,8 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
+      <div className="content" dangerouslySetInnerHTML={{__html: htmlTemplate}}></div>
+
       <Head>
         <title>Tax Calculator</title>
         <link rel="icon" href="/favicon.ico" />

@@ -12,7 +12,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -23,10 +23,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.footer img {
-  margin-left: 0.5rem;
 }
 
 .footer a {
@@ -71,16 +67,6 @@
     Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-
-  max-width: 800px;
-  margin-top: 3rem;
-}
-
 .card {
   margin: 1rem;
   flex-basis: 45%;
@@ -113,11 +99,103 @@
 
 .logo {
   height: 1em;
+  margin: 0 0.2rem 0 0.5rem;
+}
+
+.taxCalculatorContainer {
+  display: flex;
+  width: 90vw;
+}
+
+.taxCalculatorContainer .taxCalculatorForm {
+  width: 50%;
+  height: 45vh;
+  max-height: 45vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.taxCalculatorContainer .taxCalculatorForm .taxCalculatorFormContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.taxCalculatorContainer
+  .taxCalculatorForm
+  .taxCalculatorFormContent
+  .taxCalculatorFormSection {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+}
+
+.taxCalculatorContainer
+  .taxCalculatorForm
+  .taxCalculatorFormContent
+  .taxCalculatorFormSection 
+  .taxCalculatorFormImported {
+  width: 100%;
+}
+
+.taxCalculatorContainer
+  .taxCalculatorForm
+  .taxCalculatorFormContent
+  .taxCalculatorFormSection 
+  .taxCalculatorFormItem {
+  width: 45%;
+}
+
+.taxCalculatorContainer .taxCalculatorProducts {
+  width: 50%;
+  height: 45vh;
+  max-height: 45vh;
+  display: flex;
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+.taxCalculatorContainer .taxCalculatorProducts .productsContainer {
+  width: 100rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.taxCalculatorContainer
+  .taxCalculatorProducts
+  .productsContainer
+  .productContent {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (max-width: 600px) {
-  .grid {
-    width: 100%;
+  .taxCalculatorContainer {
+    display: flex;
     flex-direction: column;
+    width: 90vw;
+  }
+
+  .taxCalculatorContainer .taxCalculatorForm {
+    width: 100%;
+  }
+
+  .taxCalculatorContainer .taxCalculatorProducts {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .taxCalculatorContainer .taxCalculatorProducts .productsContainer {
+    width: 90%;
+    flex-direction: column;
+  }
+
+  .card {
+    width: 100%;
   }
 }

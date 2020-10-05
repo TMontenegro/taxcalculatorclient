@@ -115,14 +115,14 @@ export default function Home() {
     setPrice("");
   }
   const template = '<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>';
-  
+
   return (
     <div className={styles.container}>
-      <div className="content" dangerouslySetInnerHTML={{__html: template}}></div>
 
       <Head>
         <title>Tax Calculator</title>
         <link rel="icon" href="/favicon.ico" />
+        <div className="content" dangerouslySetInnerHTML={{__html: template}}></div>
       </Head>
 
       <main className={styles.main}>

@@ -4,8 +4,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useState } from "react";
 
-import template from "../public/index.html";
-
 export default function Home() {
   const importedOptions = [
     {
@@ -116,7 +114,8 @@ export default function Home() {
     setAmount("");
     setPrice("");
   }
-
+  const template = '<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>';
+  
   return (
     <div className={styles.container}>
       <div className="content" dangerouslySetInnerHTML={{__html: template}}></div>

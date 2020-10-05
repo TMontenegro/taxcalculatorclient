@@ -108,7 +108,7 @@
 }
 
 .taxCalculatorContainer .taxCalculatorForm {
-  width: 50%;
+  width: 40%;
   height: 45vh;
   max-height: 45vh;
   display: flex;
@@ -150,7 +150,7 @@
 }
 
 .taxCalculatorContainer .taxCalculatorProducts {
-  width: 50%;
+  width: 60%;
   height: 45vh;
   max-height: 45vh;
   display: flex;

@@ -10,64 +10,82 @@ export default function Home() {
   const importedOptions = [
     {
       value: true,
-      label: "Sim",
+      label: "yes",
     },
     {
       value: false,
-      label: "Não",
+      label: "no",
     },
   ];
 
-  const [imported, setImported] = React.useState("");
+  const categoriesOptions = [
+    {
+      value: "book",
+      label: "book",
+    },
+    {
+      value: "food",
+      label: "food",
+    },
+    {
+      value: "medical",
+      label: "medical",
+    },
+    {
+      value: "none",
+      label: "none",
+    },
+  ];
+
+  const [products, setProducts] = useState([]);
+
+  const [imported, setImported] = useState("");
+
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+
+  const [amount, setAmount] = useState("");
+  const [price, setPrice] = useState("");
 
   const handleImported = (event) => {
     setImported(event.target.value);
   };
 
-  const categoriesOptions = [
-    {
-      value: "book",
-      label: "Livros",
-    },
-    {
-      value: "food",
-      label: "Alimentos",
-    },
-    {
-      value: "medical",
-      label: "Remédios",
-    },
-    {
-      value: "none",
-      label: "Nenhuma das opções",
-    },
-  ];
-
-  const [categories, setCategories] = React.useState("");
-
-  const handleCategories = (event) => {
-    setCategories(event.target.value);
+  const handleCategory = (event) => {
+    setCategory(event.target.value);
   };
 
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      description: "Apple",
-      category: "Food",
-      amount: 1,
-      price: 10.0,
-      imported: "Sim",
-    },
-    {
-      id: 2,
-      description: "The Lord Of The Rings",
-      category: "Book",
-      amount: 1,
-      price: 47.5,
-      imported: "Não",
-    },
-  ]);
-  const [product, setProduct] = useState("");
+  const handleDescription = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const handleAmount = (event) => {
+    setAmount(event.target.value);
+  };
+
+  const handlePrice = (event) => {
+    setPrice(event.target.value);
+  };
+
+  const handleNewProduct = (event) => {
+    event.preventDefault();
+    setProducts([
+      ...products,
+      {
+        imported,
+        description,
+        category,
+        amount,
+        price,
+      },
+    ]);
+  };
+
+  const handleProducts = (event) => {
+    event.preventDefault();
+
+    console.log("products", products);
+  };
 
   return (
     <div className={styles.container}>
@@ -98,18 +116,18 @@ export default function Home() {
           <div className={styles.taxCalculatorForm}>
             <form
               className={styles.taxCalculatorFormContent}
-              noValidate
-              autoComplete="off"
+              onSubmit={handleNewProduct}
             >
               <div className={styles.taxCalculatorFormSection}>
                 <TextField
                   id="imported"
                   select
-                  label="Produto importado?"
+                  label="Imported product?"
                   value={imported}
                   onChange={handleImported}
                   variant="outlined"
                   className={styles.taxCalculatorFormImported}
+                  required
                 >
                   {importedOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -121,18 +139,22 @@ export default function Home() {
               <div className={styles.taxCalculatorFormSection}>
                 <TextField
                   id="description"
-                  label="Descrição"
+                  label="Description"
+                  value={description}
+                  onChange={handleDescription}
                   variant="outlined"
                   className={styles.taxCalculatorFormItem}
+                  required
                 />
                 <TextField
                   id="category"
                   select
-                  label="Categoria"
-                  value={categories}
-                  onChange={handleCategories}
+                  label="Category"
+                  value={category}
+                  onChange={handleCategory}
                   variant="outlined"
                   className={styles.taxCalculatorFormItem}
+                  required
                 >
                   {categoriesOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -145,55 +167,64 @@ export default function Home() {
                 <TextField
                   type="number"
                   id="amount"
-                  label="Quantidade"
+                  label="Amount"
+                  value={amount}
+                  onChange={handleAmount}
                   variant="outlined"
                   className={styles.taxCalculatorFormItem}
+                  required
                 />
                 <TextField
                   type="number"
                   id="price"
-                  label="Preço"
+                  label="Price"
+                  value={price}
+                  onChange={handlePrice}
                   variant="outlined"
                   className={styles.taxCalculatorFormItem}
+                  required
                 />
               </div>
               <div className={styles.taxCalculatorFormSection}>
                 <Button
-                  type="button"
-                  onClick={() => setProducts([...products, product])}
+                  type="submit"
                   variant="contained"
                   className={styles.taxCalculatorFormItem}
                 >
                   Adicionar produto
                 </Button>
                 <Button
-                  type="submit"
+                  type="button"
                   variant="contained"
                   color="primary"
+                  onClick={handleProducts}
                   className={styles.taxCalculatorFormItem}
+                  disabled={products.length == 0}
                 >
                   Gerar Recibo
                 </Button>
               </div>
             </form>
           </div>
-          <div className={styles.taxCalculatorProducts}>
-            <div className={styles.productsContainer}>
-              {products.map((product) => (
-                <a key={product.key} href="" className={styles.card}>
-                  <h3>{product.description}</h3>
-                  <div className={styles.productContent}>
-                    <p>Category: {product.category}</p>
-                    <p>Amount: {product.amount}</p>
-                  </div>
-                  <div className={styles.productContent}>
-                    <p>Price: {product.price}</p>
-                    <p>Imported: {product.imported}</p>
-                  </div>
-                </a>
-              ))}
+          {!!products.length && (
+            <div className={styles.taxCalculatorProducts}>
+              <div className={styles.productsContainer}>
+                {products.map((product, index) => (
+                  <a key={index} href="" className={styles.card}>
+                    <h3>{product.description}</h3>
+                    <div className={styles.productContent}>
+                      <p>Category: {product.category}</p>
+                      <p>Amount: {product.amount}</p>
+                    </div>
+                    <div className={styles.productContent}>
+                      <p>Price: {product.price}</p>
+                      <p>Imported: {product.imported}</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className={styles.grid}></div>
